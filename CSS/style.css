@@ -2,6 +2,31 @@ body {
     background-color: orange;
 }
 
+footer {
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 30%;
+    color: blanchedalmond;
+    font-family: 'Permanent Marker', cursive;
+}
+
+input {
+    font-size: 40px;
+    background-color: blanchedalmond;
+    display: block;
+    margin: 0 auto;
+    height: 4rem;
+    width: 90%;
+    text-align: center;
+    font-family: 'Permanent Marker', cursive;
+    border: 0;
+}
+
+input:focus {
+    outline: none; /*No border when box is focused */
+      color: black;
+}
+
 .calculator {
     margin: auto;
     margin-top: 50%;
@@ -15,12 +40,14 @@ body {
 }
 
 .display {
+    font-family: 'Permanent Marker', cursive;
     background-color: blanchedalmond;
     font-size: 50px;
     text-align: center;
     margin: 30px 20px;
     border: 2px solid rgba(121, 120, 120, 0.384);
     border-radius: 10px;
+
 }
 
 .grid {
@@ -40,4 +67,11 @@ body {
 
 .equal {
     background-color: brown;
+}
+
+.pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-top: 10px;
 }
