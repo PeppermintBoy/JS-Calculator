@@ -31,36 +31,113 @@ let operator;
 keys.forEach(key => key.addEventListener('click', operate));
 
 
+
+let firstNumber = function(e) {
+    console.log(`array = ${array}`);
+    console.log(`array2 = ${array2}`);
+    let number = e.target.textContent;
+    array.push(number);
+    let joinedArray = array.join('');
+    screen.value = joinedArray;
+    return joinedArray.split('');
+}
+
 function operate(e) {
     if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷') {
+        console.log(operator);
+        if (operator) {
+            const joinedArray = parseInt(array.join(''));
+            const joinedArray2 = parseInt(array2.join(''))
+            if (operator == '+') {
+                operator = e.target.textContent;
+                const answer = add(joinedArray2, joinedArray);
+                screen.value = answer;
+                array2 = answer.toString().split('');
+                array = [];
+                console.log(`array = ${array}`);
+                console.log(`array2 = ${array2}`);
+                return;
+            } 
+
+            else if (operator == '-') {
+                operator = e.target.textContent;
+                const answer = subtract(joinedArray2, joinedArray);
+                screen.value = answer;
+                array2 = answer.toString().split('');
+                array = [];
+                return;
+            }  
+            else if (operator == 'x') {
+                operator = e.target.textContent;
+                const answer = multiply(joinedArray2, joinedArray);
+                screen.value = answer;
+                array2 = answer.toString().split('');
+                array = [];
+                return;
+            }
+            else if (operator == '÷') {
+                operator = e.target.textContent;
+                const answer = divide(joinedArray2, joinedArray);
+                screen.value = answer;
+                array2 = answer.toString().split('');
+                array = [];
+                return;
+            }
+
+        }
+        /*else if (array2 !== []) {
+            operator = e.target.textContent;
+            console.log(`array = ${array}`);
+            console.log(`array2 = ${array2}`);
+            return listening;
+        }  */
+        
         operator = e.target.textContent;
+        
         array2 = array;
         array = [];
-        console.log(array);
-        console.log(array2);
-        return screen.value = '0';
+        console.log(`array = ${array}`);
+        console.log(`array2 = ${array2}`);
+        return;
     }
     else if (e.target.textContent == '=') {
         const joinedArray = parseInt(array.join(''));
         const joinedArray2 = parseInt(array2.join(''))
         if (operator == '+') {
-            return screen.value = add(joinedArray2, joinedArray);
+            const answer = add(joinedArray2, joinedArray);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            operator = false;
+            console.log(`array = ${array}`);
+            console.log(`array2 = ${array2}`);
+            return; 
         } 
         else if (operator == '-') {
-            return screen.value = subtract(joinedArray2, joinedArray);
+            const answer = subtract(joinedArray2, joinedArray);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            operator = false;
+            return;
         }  
         else if (operator == 'x') {
-            return screen.value = multiply(joinedArray2, joinedArray);
+            const answer = multiply(joinedArray2, joinedArray);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            operator = false;
+            return;
         }
         else if (operator == '÷') {
-            return screen.value = divide(joinedArray2, joinedArray);
+            const answer = divide(joinedArray2, joinedArray);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            operator = false;
+            return;
         }
          
     }
-    console.log(e.target.textContent);
-    let number = e.target.textContent;
-    array.push(number);
-    let joinedArray = array.join('');
-    return screen.value = joinedArray;
+    return firstNumber(e);
 } 
-
