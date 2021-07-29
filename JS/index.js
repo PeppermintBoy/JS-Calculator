@@ -1,23 +1,4 @@
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
-//Inputted number shows on screen
-//store that inputted number
-//Add the first and second number when an operator is pressed.
-
+//Variables
 const screen = document.querySelector('.digits');
 const keys = document.querySelectorAll('.key');
 const reset = document.querySelector('.reset');
@@ -26,29 +7,24 @@ const deleteKey = document.querySelector('.delete');
 let array = [];
 let array2 = [];
 let operator;
-//Variables for equal input in a row.
+//Variables for when equals are inputted in a row.
 let firstEqual; //true or false
 let firstNumberForEqual; //Last number inputted
 let operatorForEqual; //Last operator inputted
 
+//Event listeners.
 keys.forEach(key => key.addEventListener('click', operate));
 reset.addEventListener('click', resetAll);
 deleteKey.addEventListener('click', deleteLastDigit);
-
-
-let firstNumber = function(e) {
-    let number = e.target.textContent;
-    array.push(number);
-    
-    let joinedArray = array.join('');
-    screen.value = joinedArray;
-    return joinedArray.split('');
-}
 
 function operate(e) {
     //Give error when operators are first things to be inputted.
     if (array.length == 0 && array2.length == 0 && (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷' || e.target.textContent == '=')) {
         return resetAll();
+    }
+    //Ignore '=' input when pressed before input of 2nd number.
+    else if (array2.length == 0 && e.target.textContent == '=') {
+        return;
     }
     else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷') {
         firstEqual = false;
@@ -183,6 +159,15 @@ function operate(e) {
     return firstNumber(e);
 } 
 
+let firstNumber = function(e) {
+    let number = e.target.textContent;
+    array.push(number);
+    
+    let joinedArray = array.join('');
+    screen.value = joinedArray;
+    return joinedArray.split('');
+}
+
 function resetAll() {
     array = [];
     array2 = [];
@@ -201,4 +186,19 @@ function deleteLastDigit() {
 function round(value) {
     return Number(Math.round(value + 'e' + 8)+ 'e-' + 8);
 }
-  
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
