@@ -77,6 +77,9 @@ function operate(e) {
                 return;
             }
             else if (operator == '÷') {
+                if (joinedArray == "0") {
+                    return screen.value = 'ERROR';
+                }
                 operator = e.target.textContent;
                 const answer = round(divide(joinedArray2, joinedArray));
                 screen.value = answer;
@@ -125,6 +128,9 @@ function operate(e) {
             return;
         }
         else if (operator == '÷') {
+            if (joinedArray == '0') {
+                return screen.value = 'ERROR';
+            }
             const answer = round(divide(joinedArray2, joinedArray));
             screen.value = answer;
             array2 = answer.toString().split('');
@@ -160,6 +166,9 @@ function operate(e) {
             return;
         }  
         else if (operatorForEqual == '÷') {
+            if (firstNumberForEqual == '0') {
+                return screen.value = 'ERROR';
+            }
             const answer = round(divide(joinedArray2, firstNumberForEqual));
             screen.value = answer;
             array2 = answer.toString().split('');
