@@ -190,10 +190,7 @@ function resetAll() {
 }
 
 function deleteLastDigit() {
-
-console.log(array)
-    array.pop(); //Firstly, pops 'delete', which was inputted upon click, from array.
-    array.pop(); //Secondly, pops the last digit from the array.
+    array.splice(-2, 2); //Deletes 'delete' and last digit.
     let joinedArray = array.join('');
     return screen.value = joinedArray;
 }
