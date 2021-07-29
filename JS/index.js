@@ -37,8 +37,6 @@ deleteKey.addEventListener('click', deleteLastDigit);
 
 
 let firstNumber = function(e) {
-    console.log(`array = ${array}`);
-    console.log(`array2 = ${array2}`);
     let number = e.target.textContent;
     array.push(number);
     
@@ -49,25 +47,22 @@ let firstNumber = function(e) {
 
 function operate(e) {
     if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷') {
-        console.log(operator);
         firstEqual = false;
         if (operator) {
             const joinedArray = parseInt(array.join(''));
             const joinedArray2 = parseInt(array2.join(''))
             if (operator == '+') {
                 operator = e.target.textContent;
-                const answer = add(joinedArray2, joinedArray);
+                const answer = round(add(joinedArray2, joinedArray));
                 screen.value = answer;
                 array2 = answer.toString().split('');
                 array = [];
-                console.log(`array = ${array}`);
-                console.log(`array2 = ${array2}`);
                 return;
             } 
 
             else if (operator == '-') {
                 operator = e.target.textContent;
-                const answer = subtract(joinedArray2, joinedArray);
+                const answer = round(subtract(joinedArray2, joinedArray));
                 screen.value = answer;
                 array2 = answer.toString().split('');
                 array = [];
@@ -75,7 +70,7 @@ function operate(e) {
             }  
             else if (operator == 'x') {
                 operator = e.target.textContent;
-                const answer = multiply(joinedArray2, joinedArray);
+                const answer = round(multiply(joinedArray2, joinedArray));
                 screen.value = answer;
                 array2 = answer.toString().split('');
                 array = [];
@@ -83,7 +78,7 @@ function operate(e) {
             }
             else if (operator == '÷') {
                 operator = e.target.textContent;
-                const answer = divide(joinedArray2, joinedArray);
+                const answer = round(divide(joinedArray2, joinedArray));
                 screen.value = answer;
                 array2 = answer.toString().split('');
                 array = [];
@@ -91,13 +86,9 @@ function operate(e) {
             }
 
         }
-        
         operator = e.target.textContent;
-        
         array2 = array;
         array = [];
-        console.log(`array = ${array}`);
-        console.log(`array2 = ${array2}`);
         return;
     }
     //When '=' is clicked for the first time.
@@ -107,18 +98,16 @@ function operate(e) {
         firstNumberForEqual = joinedArray;
         firstEqual = true;
         if (operator == '+') {
-            const answer = add(joinedArray2, joinedArray);
+            const answer = round(add(joinedArray2, joinedArray));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
             operatorForEqual = operator;
             operator = false;
-            console.log(`array = ${array}`);
-            console.log(`array2 = ${array2}`);
             return; 
         } 
         else if (operator == '-') {
-            const answer = subtract(joinedArray2, joinedArray);
+            const answer = round(subtract(joinedArray2, joinedArray));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
@@ -127,7 +116,7 @@ function operate(e) {
             return;
         }  
         else if (operator == 'x') {
-            const answer = multiply(joinedArray2, joinedArray);
+            const answer = round(multiply(joinedArray2, joinedArray));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
@@ -136,7 +125,7 @@ function operate(e) {
             return;
         }
         else if (operator == '÷') {
-            const answer = divide(joinedArray2, joinedArray);
+            const answer = round(divide(joinedArray2, joinedArray));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
@@ -150,28 +139,28 @@ function operate(e) {
         const joinedArray2 = parseInt(array2.join(''));
 
         if (operatorForEqual == '+') {
-            const answer = add(joinedArray2, firstNumberForEqual);
+            const answer = round(add(joinedArray2, firstNumberForEqual));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
             return;
         }  
         else if (operatorForEqual == '-') {
-            const answer = subtract(joinedArray2, firstNumberForEqual);
+            const answer = round(subtract(joinedArray2, firstNumberForEqual));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
             return;
         }  
         else if (operatorForEqual == 'x') {
-            const answer = multiply(joinedArray2, firstNumberForEqual);
+            const answer = round(multiply(joinedArray2, firstNumberForEqual));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
             return;
         }  
         else if (operatorForEqual == '÷') {
-            const answer = divide(joinedArray2, firstNumberForEqual);
+            const answer = round(divide(joinedArray2, firstNumberForEqual));
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
@@ -194,3 +183,9 @@ function deleteLastDigit() {
     let joinedArray = array.join('');
     return screen.value = joinedArray;
 }
+
+//Rounds up answer to show max 8 digits after decimal.
+function round(value) {
+    return Number(Math.round(value + 'e' + 8)+ 'e-' + 8);
+}
+  
