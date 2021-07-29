@@ -46,7 +46,11 @@ let firstNumber = function(e) {
 }
 
 function operate(e) {
-    if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷') {
+    //Give error when operators are first things to be inputted.
+    if (array.length == 0 && array2.length == 0 && (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷' || e.target.textContent == '=')) {
+        return resetAll();
+    }
+    else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷') {
         firstEqual = false;
         if (operator) {
             const joinedArray = parseInt(array.join(''));
