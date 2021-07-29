@@ -35,11 +35,13 @@ keys.forEach(key => key.addEventListener('click', operate));
 reset.addEventListener('click', resetAll);
 deleteKey.addEventListener('click', deleteLastDigit);
 
+
 let firstNumber = function(e) {
     console.log(`array = ${array}`);
     console.log(`array2 = ${array2}`);
     let number = e.target.textContent;
     array.push(number);
+    
     let joinedArray = array.join('');
     screen.value = joinedArray;
     return joinedArray.split('');
@@ -188,5 +190,10 @@ function resetAll() {
 }
 
 function deleteLastDigit() {
-    
+
+console.log(array)
+    array.pop(); //Firstly, pops 'delete', which was inputted upon click, from array.
+    array.pop(); //Secondly, pops the last digit from the array.
+    let joinedArray = array.join('');
+    return screen.value = joinedArray;
 }
