@@ -14,23 +14,26 @@ function divide(a, b) {
     return a / b;
 }
 
-function operate(firstNumber, secondNumber, operator){
-    return operator(firstNumber, secondNumber);
-}
-
 //Inputted number shows on screen
 //store that inputted number
 //Add the first and second number when an operator is pressed.
 
 const screen = document.querySelector('.digits');
 const keys = document.querySelectorAll('.key');
+const reset = document.querySelector('.reset');
+const deleteKey = document.querySelector('.delete');
+
 let array = [];
 let array2 = [];
 let operator;
+//Variables for equal input in a row.
+let firstEqual; //true or false
+let firstNumberForEqual; //Last number inputted
+let operatorForEqual; //Last operator inputted
 
 keys.forEach(key => key.addEventListener('click', operate));
-
-
+reset.addEventListener('click', resetAll);
+deleteKey.addEventListener('click', deleteLastDigit);
 
 let firstNumber = function(e) {
     console.log(`array = ${array}`);
@@ -45,6 +48,7 @@ let firstNumber = function(e) {
 function operate(e) {
     if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷') {
         console.log(operator);
+        firstEqual = false;
         if (operator) {
             const joinedArray = parseInt(array.join(''));
             const joinedArray2 = parseInt(array2.join(''))
@@ -85,12 +89,6 @@ function operate(e) {
             }
 
         }
-        /*else if (array2 !== []) {
-            operator = e.target.textContent;
-            console.log(`array = ${array}`);
-            console.log(`array2 = ${array2}`);
-            return listening;
-        }  */
         
         operator = e.target.textContent;
         
@@ -100,14 +98,18 @@ function operate(e) {
         console.log(`array2 = ${array2}`);
         return;
     }
-    else if (e.target.textContent == '=') {
+    //When '=' is clicked for the first time.
+    else if (e.target.textContent == '=' && firstEqual == false) {
         const joinedArray = parseInt(array.join(''));
-        const joinedArray2 = parseInt(array2.join(''))
+        const joinedArray2 = parseInt(array2.join(''));
+        firstNumberForEqual = joinedArray;
+        firstEqual = true;
         if (operator == '+') {
             const answer = add(joinedArray2, joinedArray);
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
+            operatorForEqual = operator;
             operator = false;
             console.log(`array = ${array}`);
             console.log(`array2 = ${array2}`);
@@ -118,6 +120,7 @@ function operate(e) {
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
+            operatorForEqual = operator;
             operator = false;
             return;
         }  
@@ -126,6 +129,7 @@ function operate(e) {
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
+            operatorForEqual = operator;
             operator = false;
             return;
         }
@@ -134,10 +138,55 @@ function operate(e) {
             screen.value = answer;
             array2 = answer.toString().split('');
             array = array2;
+            operatorForEqual = operator;
             operator = false;
             return;
         }
-         
+    }
+    //When '=' is clicked in a row.
+    else if (e.target.textContent == '=' && firstEqual == true) {
+        const joinedArray2 = parseInt(array2.join(''));
+
+        if (operatorForEqual == '+') {
+            const answer = add(joinedArray2, firstNumberForEqual);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            return;
+        }  
+        else if (operatorForEqual == '-') {
+            const answer = subtract(joinedArray2, firstNumberForEqual);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            return;
+        }  
+        else if (operatorForEqual == 'x') {
+            const answer = multiply(joinedArray2, firstNumberForEqual);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            return;
+        }  
+        else if (operatorForEqual == '÷') {
+            const answer = divide(joinedArray2, firstNumberForEqual);
+            screen.value = answer;
+            array2 = answer.toString().split('');
+            array = array2;
+            return;
+        }  
     }
     return firstNumber(e);
 } 
+
+function resetAll() {
+    array = [];
+    array2 = [];
+    operator = false;
+    firstEqual = false;
+    screen.value = '';
+}
+
+function deleteLastDigit() {
+    
+}
