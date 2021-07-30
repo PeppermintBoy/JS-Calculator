@@ -163,6 +163,9 @@ function operate(e) {
 let firstNumber = function(e) {
     let joinedArray;
     let number = e.target.textContent;
+    if (e.target.textContent == '.' && array.includes('.')) {
+        return;
+    }
     array.push(number);
     joinedArray = array.join('');
     screen.value = joinedArray;
