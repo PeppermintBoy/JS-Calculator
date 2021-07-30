@@ -5,7 +5,7 @@ body {
 footer {
     text-align: center;
     margin-bottom: 0;
-    margin-top: 30%;
+    margin-top: 0;
     color: blanchedalmond;
     font-family: 'Permanent Marker', cursive;
 }
@@ -29,7 +29,8 @@ input:focus {
 
 .calculator {
     margin: auto;
-    margin-top: 50%;
+    margin-top: 15%;
+    margin-bottom: 50px;
     width: 20em;
     height: 30em;
     border: 1px solid grey;
@@ -86,4 +87,15 @@ input:focus {
     transform: scale(1.5);
     border-color: rgb(199, 7, 16);
     box-shadow: 0 0 1rem rgb(206, 0, 51);
+  }
+
+  /*Disables copy and paste */
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
   }

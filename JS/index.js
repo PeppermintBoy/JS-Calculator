@@ -161,10 +161,10 @@ function operate(e) {
 } 
 
 let firstNumber = function(e) {
+    let joinedArray;
     let number = e.target.textContent;
     array.push(number);
-    
-    let joinedArray = array.join('');
+    joinedArray = array.join('');
     screen.value = joinedArray;
     return joinedArray.split('');
 }
