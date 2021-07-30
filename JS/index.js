@@ -16,6 +16,7 @@ let operatorForEqual; //Last operator inputted
 keys.forEach(key => key.addEventListener('click', operate));
 reset.addEventListener('click', resetAll);
 deleteKey.addEventListener('click', deleteLastDigit);
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
 function operate(e) {
     //Give error when operators are first things to be inputted.
@@ -186,6 +187,20 @@ function deleteLastDigit() {
 function round(value) {
     return Number(Math.round(value + 'e' + 8)+ 'e-' + 8);
 }
+
+//Enlarge key when clicked.
+function enlargeKey(e) {
+    const key = document.getElementById(`${e}`);
+    if (e == 17) {
+        return key.classList.add('enlargeEqual');
+    }
+    return key.classList.add('enlarge');
+}
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return; //Skip it if it's not a transform
+    this.classList.remove('enlarge', 'enlargeEqual');
+  }
 
 function add(a, b) {
     return a + b;
