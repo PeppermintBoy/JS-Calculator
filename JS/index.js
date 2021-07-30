@@ -29,7 +29,11 @@ function operate(e) {
     }
     else if (e.target.textContent == '+' || e.target.textContent == '-' || e.target.textContent == 'x' || e.target.textContent == '÷') {
         firstEqual = false;
-        if (operator) {
+        //Prevent operators to be inputted in a row.
+        if (operator && array.length == 0) {
+            return;
+        }
+        else if (operator) {
             const joinedArray = parseInt(array.join(''));
             const joinedArray2 = parseInt(array2.join(''))
             if (operator == '+') {
@@ -70,9 +74,14 @@ function operate(e) {
             }
 
         }
+        
         operator = e.target.textContent;
         array2 = array;
         array = [];
+        return;
+    }
+    //When '=' is clicked right after an operator. return nothing.
+    else if (e.target.textContent == '=' && array.length == 0) {
         return;
     }
     //When '=' is clicked for the first time.
